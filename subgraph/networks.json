@@ -1,0 +1,8 @@
+{
+  "scroll-sepolia": {
+    "CarbonMarket": {
+      "address": "0x75cb2bcB56f0712bE0547FaB926b781803b73faC",
+      "startBlock": 2297885
+    }
+  }
+}
