@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import SvgIcon from '../components/SvgIcon';
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import SvgIcon from "../components/SvgIcon";
 
 const NftCard = ({ cerfId, id, price }) => {
   const [nftData, setNftData] = useState({});
@@ -8,9 +8,9 @@ const NftCard = ({ cerfId, id, price }) => {
   const fetchNftData = async (id) => {
     setNftData({
       id: id,
-      name: 'Certificate #' + cerfId,
+      name: "Certificate #" + cerfId,
       cert_id: cerfId,
-      image: '/nft.jpeg',
+      image: "./nftimage.png",
     });
   };
 
