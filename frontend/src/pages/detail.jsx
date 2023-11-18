@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import SvgIcon from '../components/SvgIcon';
-import { retireNft } from '../utils/web3/carbonMarket';
+import SvgIcon from "../components/SvgIcon";
+import { retireNft } from "../utils/web3/carbonMarket";
 
 export const getMintById = async (id) => {
   const query = `
@@ -16,10 +16,10 @@ export const getMintById = async (id) => {
       }
   `;
 
-  const url = 'https://api.studio.thegraph.com/query/57070/avatar/v3/';
+  const url = "https://api.studio.thegraph.com/query/57070/avatar/v3/";
   const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),
   };
 
@@ -28,7 +28,7 @@ export const getMintById = async (id) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching mint data:', error);
+    console.error("Error fetching mint data:", error);
     return null;
   }
 };
@@ -38,7 +38,7 @@ const Detail = () => {
   const [data, setData] = useState({
     id: 1,
     cert_id: 12345,
-    provider: 'BikeRental',
+    provider: "BikeRental",
     price: 1234,
   });
 
@@ -61,8 +61,8 @@ const Detail = () => {
   }, [id]); // Effect runs on component mount and whenever 'id' changes
 
   async function retireCall() {
-    console.log('retirecall called');
-    let nftid = data.id; // Use the fetched NFT id
+    console.log("retirecall called");
+    let nftid = data.cert_id; // Use the fetched NFT id
     await retireNft(nftid);
   }
 
@@ -86,11 +86,11 @@ const Detail = () => {
             <div className="p-5 border-b border-gray-300">
               <ul className="p-5">
                 <li className="flex justify-between py-3 mb-3 border-b border-gray-300">
-                  <span className="font-bold">Certificate ID:</span>{' '}
+                  <span className="font-bold">Certificate ID:</span>{" "}
                   <span>{data.cert_id}</span>
                 </li>
                 <li className="flex justify-between py-3 mb-3 border-b border-gray-300">
-                  <span className="font-bold">Provider:</span>{' '}
+                  <span className="font-bold">Provider:</span>{" "}
                   <span>{data.provider}</span>
                 </li>
               </ul>
