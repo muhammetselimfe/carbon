@@ -20,7 +20,7 @@ Our contracts have been deployed and verified on the Scroll Sepolia Testnet. Key
 We utilize TheGraph for querying blockchain data efficiently. This integration allows us to display NFT certificates directly in our frontend application without a traditional backend, using GraphQL queries.
 
 - **Subgraph**: [Avatar Subgraph](https://thegraph.com/studio/subgraph/avatar)
-- **Endpoint**: `https://api.studio.thegraph.com/query/57070/avatar/v1`
+- **Endpoint**: `https://api.studio.thegraph.com/query/57070/avatar/v3`
 
 
 ### UI 
@@ -28,5 +28,8 @@ We utilize TheGraph for querying blockchain data efficiently. This integration a
 ![MacBook Pro 14_ - 2](https://github.com/izzetemredemir/carbon/assets/11755605/160c40dc-a56f-4754-b538-5b52e11c9ba6)
 ![MacBook Pro 14_ - 3](https://github.com/izzetemredemir/carbon/assets/11755605/c26f1f7e-ea06-4d5d-93ba-2cdc01d2edc3)
 ![MacBook Pro 14_ - 4](https://github.com/izzetemredemir/carbon/assets/11755605/c1bd7636-2bc3-4d1c-990e-e16965938b64)
+
+
+
 
 
