@@ -1,11 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   corePlugins: {
-    container: false
+    container: false,
   },
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
     container: {
@@ -31,8 +29,8 @@ module.exports = {
             maxWidth: '1140px',
             padding: 0,
           },
-        }
-      })
-    }
-  ]
-}
+        },
+      });
+    },
+  ],
+};

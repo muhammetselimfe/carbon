@@ -1,6 +1,6 @@
 import { BigNumber, providers, utils } from "ethers";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 
 import { addLiquidity, calculateCD,  getCDTokensBalance,

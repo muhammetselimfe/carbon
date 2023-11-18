@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Swap from '../components/Swap';
 import Liquidity from '../components/Liquidity';
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 
 
 
@@ -9,29 +9,29 @@ function Exchange() {
   const [activeTab, setActiveTab] = useState('swap');
 
 
-const provider = new ethers.providers.JsonRpcProvider("https://api.avax-test.network/ext/bc/C/rpc");
+// const provider = new ethers.providers.JsonRpcProvider("https://api.avax-test.network/ext/bc/C/rpc");
 
-const DexAddress = "0x0355eE85Be5eD60331a36Ee096e829f500FC57c9";
-const totalSupplyabi = [
-  "function totalSupply() view returns (uint256)"
-];
+// const DexAddress = "0x0355eE85Be5eD60331a36Ee096e829f500FC57c9";
+// const totalSupplyabi = [
+//   "function totalSupply() view returns (uint256)"
+// ];
 
-async function totalSupply() {
-	const contract = new ethers.Contract(DexAddress, totalSupplyabi,provider);
-	let result = await contract.functions.totalSupply();
-  result = result[0].toNumber();
-	console.log("result", result);
-}
+// async function totalSupply() {
+// 	const contract = new ethers.Contract(DexAddress, totalSupplyabi,provider);
+// 	let result = await contract.functions.totalSupply();
+//   result = result[0].toNumber();
+// 	console.log("result", result);
+// }
 
-const cryptoDevTokenAddressabi = [
-  "function cryptoDevTokenAddress() view returns (address)"
-];
+// const cryptoDevTokenAddressabi = [
+//   "function cryptoDevTokenAddress() view returns (address)"
+// ];
 
-async function cryptoDevTokenAddress() {
-	const contract = new ethers.Contract(DexAddress, cryptoDevTokenAddressabi, provider);   
-	const result = await contract.functions.cryptoDevTokenAddress();
-  console.log("result", result[0]);
-}
+// async function cryptoDevTokenAddress() {
+// 	const contract = new ethers.Contract(DexAddress, cryptoDevTokenAddressabi, provider);   
+// 	const result = await contract.functions.cryptoDevTokenAddress();
+//   console.log("result", result[0]);
+// }
 
 
 

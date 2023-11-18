@@ -36,7 +36,7 @@ const Provider = () => {
         <div className="w-full md:w-5/12 overflow-hidden shadow-2xl border-2 border-gray-100 rounded-xl mb-5">
           <div className="p-5">
             <div className="border-b w-full">
-              <h1 className="text-xl font-bold text-center pb-2">Mint</h1>
+              {/* <h1 className="text-xl font-bold text-center pb-2">Mint</h1> */}
             </div>
             <p className="pt-5">Amount of carbon (m³)</p>
             <input
