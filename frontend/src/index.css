@@ -1,68 +1,47 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.svg-trigger {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 400ms;
+    user-select: none;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.svg-trigger path {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: #333;
+    strokeWidth: 5;
+    strokeLinecap: round;
 }
-a:hover {
-  color: #535bf2;
+.svg-trigger path:nth-child(1) {
+    stroke-dasharray: 40 160;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.menu-open .svg-trigger path:nth-child(1) {
+    stroke-dashoffset: -64px;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.svg-trigger path:nth-child(2) {
+    stroke-dasharray: 40 142;
+    transform-origin: 50%;
+    transition: transform 400ms;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.menu-open .svg-trigger path:nth-child(2) {
+    transform: rotate(90deg);
 }
-button:hover {
-  border-color: #646cff;
+.svg-trigger path:nth-child(3) {
+    stroke-dasharray: 40 85;
+    transform-origin: 50%;
+    transition: transform 400ms, stroke-dashoffset 400ms;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.menu-open .svg-trigger path:nth-child(3) {
+    stroke-dashoffset: -64px;
+}
+.menu-open .svg-trigger {
+    transform: rotate(45deg);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.menu-open #navbar-default {
+    @apply block;
 }
