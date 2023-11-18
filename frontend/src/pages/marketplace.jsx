@@ -6,63 +6,60 @@ import { tokenToValue } from '../utils/web3/certificate';
 
 function Marketplace() {
   const [query] = useSearchParams();
-  const [selectedProvider, setSelectedProvider] = useState(query.get('provider') || '');
+  const [selectedProvider, setSelectedProvider] = useState(
+    query.get('provider') || ''
+  );
   const [nftIDs, setNftIDs] = useState([]);
 
-  const listedNfts = [
+  const listedNfts = [];
+
+  let providers = [
     {
-      id: 200,
-      provider: 'bis',
-      price: 1200,
+      id: 'verra',
+      name: 'Verra',
     },
     {
-      id: 201,
-      provider: 'gns',
-      price: 1400,
+      id: 'goldStandard',
+      name: 'Gold Standard',
     },
     {
-      id: 202,
-      provider: 'gns',
-      price: 2000,
+      id: 'climateRegistry',
+      name: 'The Climate Registry',
+    },
+    {
+      id: 'recyclingCompany',
+      name: 'Recycling Company',
+    },
+    {
+      id: 'bikeRental',
+      name: 'Bike Rental Company',
+    },
+    {
+      id: 'solarPanelCompany',
+      name: 'Solar Energy Company',
     },
   ];
 
-  const providers = [
-    {
-      id: 'bis',
-      name: 'Bisiklet Kiralama Şirketi',
-    },
-    {
-      id: 'gns',
-      name: 'Güneş Paneli Şirketi',
-    },
-    {
-      id: 'akb',
-      name: 'Akbank'
+  const asyncGet = async () => {
+    const nfts = await getNftList();
+
+    let modifiedNfts = [];
+    for (let i = 0; i < nfts.length; i++) {
+      modifiedNfts.push({
+        cerfId: Number(nfts[i].cerfId),
+        id: nfts[i].id,
+        provider: 'bikeRental',
+        price: nfts[i].carbon,
+      });
     }
-  ];
-
-const asyncGet =  async () =>{
-  const nfts = await getNftList();
-  let modifiedNfts = [];
-  for(let i=0; i<nfts.length; i++){
-    const price = await tokenToValue(nfts[i]);
-    modifiedNfts.push({
-      id: Number(nfts[i]),
-      provider: 'akb',
-      price: Number(price)
-    })
-  }
-  return modifiedNfts.concat(listedNfts);
-  // setNftIDs(modifiedNfts.concat(listedNfts));
-}
+    return modifiedNfts.concat(listedNfts);
+  };
 
   useEffect(() => {
-    asyncGet().then((i) =>{
+    asyncGet().then((i) => {
       setNftIDs(i);
     });
-
-  }, [])
+  }, []);
 
   return (
     <section className="w-full pt-24 md:pt-32 md:min-h-screen relative flex flex-col ">
@@ -93,7 +90,9 @@ const asyncGet =  async () =>{
                         to={`/marketplace?provider=${provider.id}`}
                         className={
                           'flex items-center p-2 text-gray-900 rounded-lg' +
-                          (selectedProvider === provider ? 'hover:bg-gray-100' : '')
+                          (selectedProvider === provider
+                            ? 'hover:bg-gray-100'
+                            : '')
                         }
                         onClick={() => setSelectedProvider(provider.id)}
                       >
@@ -109,10 +108,19 @@ const asyncGet =  async () =>{
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {nftIDs
                 .filter((nft) => {
-                  return selectedProvider === '' ? 'all' : nft.provider === selectedProvider;
+                  return selectedProvider === ''
+                    ? 'all'
+                    : nft.provider === selectedProvider;
                 })
                 .map((listedNft) => {
-                  return <NftCard id={listedNft.id} price={listedNft.price} key={listedNft.id} />;
+                  return (
+                    <NftCard
+                      cerfId={listedNft.cerfId}
+                      id={listedNft.id}
+                      price={listedNft.price}
+                      key={listedNft.id}
+                    />
+                  );
                 })}
             </div>
           </div>
