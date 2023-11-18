@@ -41,6 +41,12 @@ createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [scrollSepolia],
   projectId,
+  tokens: {
+    1: {
+      address: "0xbCb425998f87AE6836Da6Ed38fcD06b66889B702",
+      // image: 'token_image_url' //optional
+    },
+  },
 });
 
 root.render(

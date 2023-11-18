@@ -21,10 +21,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const projectId = "89fcea2ce9cba137d82fda344d68dc84";
-const mainnet = {
-  chainId: 1,
+const testnet = {
+  chainId: 534351,
   name: 'Scroll Sepolia',
-  currency: 'SCROLL',
+  currency: 'ETH',
   explorerUrl: 'https://sepolia.scrollscan.dev',
   rpcUrl: 'https://scroll-sepolia-testnet.rpc.thirdweb.com'
 }
@@ -39,8 +39,17 @@ const metadata = {
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
-  chains: [mainnet],
+  chains: [testnet],
   projectId,
+  // chainImages:{
+  //   534351: "https://mirror-media.imgix.net/publication-images/LQWiwwMGKVXxM_8aQao2S.png"
+  // },
+  tokens: {
+    534351: {
+      address: "0xbCb425998f87AE6836Da6Ed38fcD06b66889B702",
+      // image: 'token_image_url' //optional
+    },
+  }
 });
 
 root.render(
