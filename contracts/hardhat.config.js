@@ -58,15 +58,15 @@ module.exports = {
   },
   etherscan: {
     apiKey: {
-      scroll: "abc",
+      scroll: process.env.SCROLLSCAN_API_KEY,
     },
     customChains: [
       {
         network: "scroll",
         chainId: 534351,
         urls: {
-          apiURL: "https://sepolia-blockscout.scroll.io/api",
-          browserURL: "https://sepolia-blockscout.scroll.io/",
+          apiURL: "https://api-sepolia.scrollscan.com/api",
+          browserURL: "https://sepolia.scrollscan.dev/",
         },
       },
     ],

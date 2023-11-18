@@ -26,7 +26,12 @@ async function main() {
 
   console.log("UniswapV2Factory contract: " + uniswapV2Factory.target);
 
-  uniswapV2Factory.createPair("0xBAC9223E8329943aC8db2BE6606DCA8bc4345C82");
+  const simple_erc20 = await hre.ethers.deployContract("Avatar");
+  await simple_erc20.waitForDeployment();
+
+  console.log("ERC20 contract: " + simple_erc20.target);
+
+  uniswapV2Factory.createPair(simple_erc20.target);
 
   const uniswapV2Router = await hre.ethers.deployContract("UniswapV2Router02", [
     uniswapV2Factory.target,
