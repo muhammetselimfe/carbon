@@ -12,7 +12,7 @@ const Liquidity = () => {
   return (
     <>
       <div className="mb-5">
-        <h2 className="block mb-3 font-semibold ">avatar</h2>
+        <h2 className="block mb-3 font-semibold ">AANG</h2>
 
         <div className="relative inline-block w-7/12 sm:w-9/12">
           <input
