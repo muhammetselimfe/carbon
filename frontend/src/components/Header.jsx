@@ -37,7 +37,14 @@ const Header = () => {
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
           setIsConnected(true);
-          setSigner(provider.getSigner());
+          const signer = provider.getSigner();
+          setSigner(signer);
+          
+          // Added these lines to update wallet address and balance after setting the signer
+          const address = await signer.getAddress();
+          const balance = await provider.getBalance(address);
+          setWalletAddress(address);
+          setEthBalance(ethers.utils.formatEther(balance));
         }
       }
     };
@@ -172,17 +179,14 @@ const Header = () => {
                   </button>
                 ) : (
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">
-                      {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-                    </span>
-                    <span className="text-sm text-gray-600">
-                      {parseFloat(ethBalance).toFixed(4)} ETH
-                    </span>
                     <button
                       className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
                     >
-                      Connected
+                      {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected'}
                     </button>
+                    <span className="text-sm font-medium text-gray-700 bg-gray-200 px-3 py-1 rounded-full">
+                      {ethBalance ? `${parseFloat(ethBalance).toFixed(2)} CARB` : '0.00 CARB'}
+                    </span>
                   </div>
                 )}
               </li>
