@@ -3,13 +3,13 @@ function Home() {
     <>
       <section className="w-full pt-24 md:pt-0 md:h-screen relative flex flex-col justify-center items-center">
         <div className="container flex py-24 md:flex-row flex-col items-center">
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+          {/* <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
             <img
               className="object-cover object-center rounded"
               alt="hero"
               src="/images/avatar-carbon-infra.png"
             />
-          </div>
+          </div> */}
           <div className="lg:flex-grow md:w-1/2 lg:pl-18 xl:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
             <h1 className="title-font text-4xl sm:text-5xl md:text-5xl lg:text-6xl mb-4 font-medium text-gray-900">
               Avatar

@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import SvgIcon from '../components/SvgIcon';
 import {
-  cryptoDevTokenToEth,
-  increaseAllowance,
   getAmountOfTokens,
   balanceOf,
-  ethToCryptoDevToken
+  swapTokens
 } from '../utils/web3/swap';
 const tokens = {
   CARBON: {
@@ -24,14 +22,14 @@ const Swap = () => {
   const [swap, setSwap] = useState([fromToken, toToken]);
   const [amount, setAmount] = useState(0);
   const [amountOfTokens, setmountOfTokens] = useState(0);
-  const [balanceText, setbBalanceText] = useState("mc4");
+  const [balanceText, setbBalanceText] = useState("AANG");
   
 
   useEffect(() => {
    try {
     getbalanceOf();
    } catch (error) {
-    
+    console.log(error);
    }
     if (direction === 1) {
       setSwap([toToken, fromToken]);
@@ -57,9 +55,9 @@ const Swap = () => {
   async function swapCall() {
     if (swap[0].symbol === 'CARBON') {
       //await increaseAllowance(amount);
-      await cryptoDevTokenToEth(amount, 1);
+      await swapTokens("0xb6E6620792c475662A762d0684e00a997E3203bF", "0x05044Cd5D9D8fa101055de80427dF4969375Ac54", "5", "1");
     } else {
-      await ethToCryptoDevToken(amount);
+      await swapTokens("0xb6E6620792c475662A762d0684e00a997E3203bF", "0x05044Cd5D9D8fa101055de80427dF4969375Ac54", "1", "5");
     }
     return false;
   }

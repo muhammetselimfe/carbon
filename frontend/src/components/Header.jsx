@@ -77,10 +77,8 @@ const Header = () => {
               setIsNavExpanded(false);
             }}
           >
-            <img src="/logo.svg" alt="Avatar" width="30" height="60" className="mr-4" />
-            <span className="self-center text-xl font-bold whitespace-nowrap">
-              Avatar
-            </span>
+            <img src="/logo.png" alt="Avatar" width="100" height="60" className="mr-4" />
+
           </Link>
           <button
             data-collapse-toggle="navbar-default"
