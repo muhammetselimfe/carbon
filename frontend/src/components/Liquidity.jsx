@@ -1,69 +1,68 @@
 import { useState } from "react";
 import { addLiquidity } from "../utils/web3/swap";
+import SvgIcon from "./SvgIcon";
 
 const Liquidity = () => {
   const [amountA, setAmountA] = useState('');
   const [amountB, setAmountB] = useState('');
   
-  const addLiq = async () => {
-    console.log(amountA)
+  const handleAddLiquidity = async () => {
     await addLiquidity(amountA, amountB);
   }
+
   return (
-    <>
-      <div className="mb-5">
-        <h2 className="block mb-3 font-semibold ">AANG</h2>
-
-        <div className="relative inline-block w-7/12 sm:w-9/12">
-          <input
-            onChange={(event) => {
-              setAmountA(event.target.value);
-            }}
-            type="text"
-            className="block mr-4 p-4 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="0.0"
-            required
-          />
+    <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+      <div className="p-8">
+        <h2 className="text-3xl font-semibold mb-6 flex items-center">
+          <SvgIcon icon="swap" className="w-8 h-8 mr-3 text-blue-500" />
+          Add Liquidity
+        </h2>
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">AANG Amount</label>
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                placeholder="0.0"
+                value={amountA}
+                onChange={(e) => setAmountA(e.target.value)}
+                required
+              />
+              <button
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 bg-gray-200 text-gray-700 rounded-md text-sm font-medium"
+              >
+                Max
+              </button>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">wETH Amount</label>
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                placeholder="0.0"
+                value={amountB}
+                onChange={(e) => setAmountB(e.target.value)}
+                required
+              />
+              <button
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 bg-gray-200 text-gray-700 rounded-md text-sm font-medium"
+              >
+                Max
+              </button>
+            </div>
+          </div>
           <button
-            type="button"
-            className="text-white absolute right-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
+            onClick={handleAddLiquidity}
+            className="w-full py-3 px-6 text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105"
           >
-            max
-          </button>
-        </div>
-        <div className="inline-block w-5/12 sm:w-3/12 pl-5">
-          <button
-            onClick={() => addLiq()}
-
-            type="submit"
-            className="block w-full p-4 text-white bg-gray-700 rounded-lg border border-gray-600"
-          >
-            Add
+            Add Liquidity
           </button>
         </div>
       </div>
-      <div>
-        <h2 className="block mb-3 font-semibold ">wETH</h2>
-        <div className="relative inline-block w-7/12 sm:w-9/12">
-          <input
-            onChange={(event) => {
-              setAmountB(event.target.value);
-            }}
-            type="text"
-            className="block mr-4 p-4 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="0.0"
-            required
-          />
-          <button
-            type="button"
-            className="text-white absolute right-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
-          >
-            max
-          </button>
-        </div>
-
-      </div>
-    </>
+    </div>
   );
 };
 

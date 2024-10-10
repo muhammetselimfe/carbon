@@ -84,7 +84,9 @@ const Header = () => {
               setIsNavExpanded(false);
             }}
           >
-            <img src="/logo.png" alt="Avatar" width="100" height="60" className="mr-4" />
+            <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mr-4 hover:animate-pulse transition-all duration-300 ease-in-out">
+              DeCarbon Market
+            </span>
 
           </Link>
           <button
@@ -111,7 +113,7 @@ const Header = () => {
                   to="/"
                   className={
                     location.pathname === '/'
-                      ? 'block py-2 pr-4 pl-3 md:p-0'
+                      ? 'block py-2 pr-4 pl-3 md:p-0 text-blue-500'
                       : 'block py-2 pr-4 pl-3 text-gray-400 md:border-0 md:p-0'
                   }
                   onClick={() => {
@@ -126,7 +128,7 @@ const Header = () => {
                   to="/exchange"
                   className={
                     location.pathname === '/exchange'
-                      ? 'block py-2 pr-4 pl-3 md:p-0'
+                      ? 'block py-2 pr-4 pl-3 md:p-0 text-blue-500'
                       : 'block py-2 pr-4 pl-3 text-gray-400 md:border-0 md:p-0'
                   }
                   onClick={() => {
@@ -141,7 +143,7 @@ const Header = () => {
                   to="/marketplace"
                   className={
                     location.pathname === '/marketplace'
-                      ? 'block py-2 pr-4 pl-3 md:p-0'
+                      ? 'block py-2 pr-4 pl-3 md:p-0 text-blue-500'
                       : 'block py-2 pr-4 pl-3 text-gray-400 md:border-0 md:p-0'
                   }
                   onClick={() => {
@@ -156,7 +158,7 @@ const Header = () => {
                   to="/provider"
                   className={
                     location.pathname === '/provider'
-                      ? 'block py-2 pr-4 pl-3 md:p-0'
+                      ? 'block py-2 pr-4 pl-3 md:p-0 text-blue-500'
                       : 'block py-2 pr-4 pl-3 text-gray-400 md:border-0 md:p-0'
                   }
                   onClick={() => {
@@ -173,14 +175,14 @@ const Header = () => {
                 {!isConnected ? (
                   <button
                     onClick={connectWallet}
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 transition-all duration-300 ease-in-out"
                   >
                     Connect Wallet
                   </button>
                 ) : (
                   <div className="flex items-center space-x-2">
                     <button
-                      className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                      className="text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center transition-all duration-300 ease-in-out"
                     >
                       {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected'}
                     </button>

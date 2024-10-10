@@ -1,85 +1,88 @@
-function Home() {
-  return (
-    <>
-      <section className="w-full pt-24 md:pt-0 md:h-screen relative flex flex-col justify-center items-center">
-        <div className="container flex py-24 md:flex-row flex-col items-center">
-          {/* <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src="/images/avatar-carbon-infra.png"
-            />
-          </div> */}
-          <div className="lg:flex-grow md:w-1/2 lg:pl-18 xl:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-            <h1 className="title-font text-4xl sm:text-5xl md:text-5xl lg:text-6xl mb-4 font-medium text-gray-900">
-              Avatar
-            </h1>
-            <p className="mb-8 leading-relaxed">
-              Avatar is a decentralized marketplace for carbon credits. It is a
-              platform for the issuance, trading, and management of carbon
-              credits.
-            </p>
-            <ul className="text-gray">
-              <li className="mb-4 w-fill flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="flex-none w-6 h-full w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-                  />
-                </svg>
-                <span className="ml-2">Asset Backed NFT Market</span>
-              </li>
-              <li className="mb-4 w-fill flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="flex-none w-6 h-full w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"
-                  />
-                </svg>
-                <span className="ml-2">
-                  Collateralized Carbon Credit Exchange
-                </span>
-              </li>
-              <li className="mb-4 w-fill flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="flex-none w-6 h-full w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+import { Link } from 'react-router-dom';
 
-                <span className="ml-2">Issue Carbon NFT</span>
-              </li>
-            </ul>
+const Home = () => {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 sm:text-5xl md:text-6xl">
+            DeCarbon Market
+          </h1>
+          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            DeCarbon Market is a decentralized marketplace for carbon credits.
+            It is a platform for the issuance, trading, and management of
+            carbon credits.
+          </p>
+          <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+            <div className="rounded-md shadow">
+              <Link
+                to="/marketplace"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 md:py-4 md:text-lg md:px-10"
+              >
+                Go to Marketplace
+              </Link>
+            </div>
+            <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+              <Link
+                to="/exchange"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+              >
+                Exchange
+              </Link>
+            </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900">Our Features</h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Discover the unique features of DeCarbon Market
+            </p>
+          </div>
+          <dl className="mt-12 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:gap-x-8">
+            {[
+              {
+                name: 'Asset Backed NFT Market',
+                description: 'Trade carbon credits as unique digital assets',
+              },
+              {
+                name: 'Collateralized Carbon Credit Exchange',
+                description: 'Secure and efficient trading of carbon credits',
+              },
+              {
+                name: 'Issue Carbon NFT',
+                description: 'Create and manage your own carbon credit NFTs',
+              },
+            ].map((feature) => (
+              <div key={feature.name} className="relative">
+                <dt>
+                  <svg
+                    className="absolute h-6 w-6 text-green-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  <p className="ml-9 text-lg leading-6 font-medium text-gray-900">{feature.name}</p>
+                </dt>
+                <dd className="mt-2 ml-9 text-base text-gray-500">{feature.description}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default Home;
