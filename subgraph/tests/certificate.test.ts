@@ -23,11 +23,11 @@ describe("Describe entity assertions", () => {
     let operator = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let approved = "boolean Not implemented"
+    let approved =true
     let newApprovalForAllEvent = createApprovalForAllEvent(
       account,
       operator,
-      approved
+      approved 
     )
     handleApprovalForAll(newApprovalForAllEvent)
   })

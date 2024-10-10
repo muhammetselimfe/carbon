@@ -2,11 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import Layout from "./components/Layout";
-import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/react";
-
-// import { WagmiConfig } from "wagmi";
-
-import { scrollSepolia } from "viem/chains";
 
 // pages
 import Home from "./pages/home.js";
@@ -20,34 +15,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const projectId = "89fcea2ce9cba137d82fda344d68dc84";
-// const mainnet = {
-//   chainId: 1,
-//   name: 'Ethereum',
-//   currency: 'ETH',
-//   explorerUrl: 'https://etherscan.io',
-//   rpcUrl: 'https://cloudflare-eth.com'
-// }
 
-// 3. Create modal
-const metadata = {
-  name: "My Website",
-  description: "My Website description",
-  url: "https://mywebsite.com",
-  icons: ["https://avatars.mywebsite.com/"],
-};
-
-createWeb3Modal({
-  ethersConfig: defaultConfig({ metadata }),
-  chains: [scrollSepolia],
-  projectId,
-  tokens: {
-    1: {
-      address: "0xbCb425998f87AE6836Da6Ed38fcD06b66889B702",
-      // image: 'token_image_url' //optional
-    },
-  },
-});
 
 root.render(
   <React.StrictMode>

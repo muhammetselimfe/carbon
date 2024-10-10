@@ -1,10 +1,71 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 
 import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [signer, setSigner] = useState(null);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [ethBalance, setEthBalance] = useState('');
   const location = useLocation();
+
+  const CORRECT_CHAIN_ID = 5353; 
+
+  const checkAndSwitchNetwork = async () => {
+    if (window.ethereum) {
+      try {
+        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+        if (parseInt(chainId, 16) !== CORRECT_CHAIN_ID) {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: `0x${CORRECT_CHAIN_ID.toString(16)}` }],
+          });
+        }
+      } catch (error) {
+        console.error('Failed to switch network:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        await checkAndSwitchNetwork();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.listAccounts();
+        if (accounts.length > 0) {
+          setIsConnected(true);
+          setSigner(provider.getSigner());
+        }
+      }
+    };
+    checkConnection();
+  }, []);
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        await checkAndSwitchNetwork();
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        const balance = await provider.getBalance(address);
+        
+        setSigner(signer);
+        setIsConnected(true);
+        setWalletAddress(address);
+        setEthBalance(ethers.utils.formatEther(balance));
+      } catch (error) {
+        console.error('Failed to connect wallet:', error);
+      }
+    } else {
+      console.log('Please install MetaMask!');
+    }
+  };
+
   return (
     <header className={isNavExpanded ? 'menu-open' : ''}>
       <nav className="border-gray-200 px-2 sm:px-4 py-2.5 primary-menu left-0 rigt-0 z-20 fixed w-full bg-white border-b">
@@ -102,6 +163,30 @@ const Header = () => {
               </li>
               <li>
                 <w3m-button/>
+              </li>
+              <li>
+                {!isConnected ? (
+                  <button
+                    onClick={connectWallet}
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Connect Wallet
+                  </button>
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600">
+                      {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
+                    </span>
+                    <span className="text-sm text-gray-600">
+                      {parseFloat(ethBalance).toFixed(4)} ETH
+                    </span>
+                    <button
+                      className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                    >
+                      Connected
+                    </button>
+                  </div>
+                )}
               </li>
             </ul>
           </div>

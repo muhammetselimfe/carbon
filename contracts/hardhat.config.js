@@ -1,5 +1,5 @@
 require("@openzeppelin/hardhat-upgrades");
-require("@nomiclabs/hardhat-etherscan");
+//require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -55,7 +55,12 @@ module.exports = {
       url: `https://scroll-sepolia-testnet.rpc.thirdweb.com`,
       accounts: [process.env.PRIVATE_KEY],
     },
+    carbon: {
+      url: `http://38.242.238.146:9650/ext/bc/GpbaxXQ5na7chZqhABP2F9811Yrkju4NHHpFqq9wehVhFbyWo/rpc`,
+      accounts: [process.env.PRIVATE_KEY],
+    },
   },
+  /*
   etherscan: {
     apiKey: {
       scroll: process.env.SCROLLSCAN_API_KEY,
@@ -70,5 +75,5 @@ module.exports = {
         },
       },
     ],
-  },
+  },*/
 };

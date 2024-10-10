@@ -1,7 +1,7 @@
 import { ethers, BigNumber } from "ethers";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
-const address = "0xbFebC4F091608a843178D25CF7EA40cE4976c44F";
+const address = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 const mintAbi = ["function mintCertificate(uint256 carbon, uint256 _cerfId)"];
 
 export const mintCertificate = async (amount, certificate) => {

@@ -1,0 +1,101 @@
+
+ýõdataSources:
+  - kind: ethereum
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmQhXknf9oVWbvKYe7Dq5LtWtxidZ4tPow9wxXzDkWVBgP
+          name: CarbonMarket
+      apiVersion: 0.0.7
+      entities:
+        - Fractionize
+        - Retire
+      eventHandlers:
+        - event: 'Fractionize(address,uint256)'
+          handler: handleFractionize
+        - event: 'Retire(address,uint256)'
+          handler: handleRetire
+      file:
+        /: /ipfs/QmdQNauoxuzgXnfvQVGsSfD4xNrFYkaXXj3TKDsd5yegWg
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: CarbonMarket
+    network: ethereum
+    source:
+      abi: CarbonMarket
+      address: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0'
+      startBlock: 16000
+  - kind: ethereum
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmNkSZ9FZa5aCHRCQ4SmTufP2tENVwPGV9hL57eUCkV6bm
+          name: Avatar
+      apiVersion: 0.0.7
+      entities:
+        - Approval
+        - OwnershipTransferred
+        - Transfer
+      eventHandlers:
+        - event: 'Approval(indexed address,indexed address,uint256)'
+          handler: handleApproval
+        - event: 'OwnershipTransferred(indexed address,indexed address)'
+          handler: handleOwnershipTransferred
+        - event: 'Transfer(indexed address,indexed address,uint256)'
+          handler: handleTransfer
+      file:
+        /: /ipfs/QmY7jqcxvR45r1Z3FS5LEyGR2TsoFYop4PWeb4dh6BpRzd
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: Avatar
+    network: ethereum
+    source:
+      abi: Avatar
+      address: '0x5FbDB2315678afecb367f032d93F642f64180aa3'
+      startBlock: 16000
+  - kind: ethereum
+    mapping:
+      abis:
+        - file:
+            /: /ipfs/QmeD4vfpZ6AHB6CfJ799f9nfFRXjVz5KdjfpNz65uyVANo
+          name: Certificate
+      apiVersion: 0.0.7
+      entities:
+        - ApprovalForAll
+        - Mint
+        - TransferBatch
+        - TransferSingle
+        - URI
+        - Whitelisted
+      eventHandlers:
+        - event: 'ApprovalForAll(indexed address,indexed address,bool)'
+          handler: handleApprovalForAll
+        - event: 'Mint(address,uint256,uint256)'
+          handler: handleMint
+        - event: >-
+            TransferBatch(indexed address,indexed address,indexed
+            address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: >-
+            TransferSingle(indexed address,indexed address,indexed
+            address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: 'URI(string,indexed uint256)'
+          handler: handleURI
+        - event: 'Whitelisted(indexed address,bool)'
+          handler: handleWhitelisted
+      file:
+        /: /ipfs/QmP1YFAPrsxTQu8mNCNzbLK2BFkaX6rEdF8EQpiQ1eKRvL
+      kind: ethereum/events
+      language: wasm/assemblyscript
+    name: Certificate
+    network: ethereum
+    source:
+      abi: Certificate
+      address: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+      startBlock: 16000
+schema:
+  file:
+    /: /ipfs/QmZd3AStMuZG3RopCGHxXCyZbmWtBQR7r3wdy7aHeJLaAk
+specVersion: 0.0.5
+õ

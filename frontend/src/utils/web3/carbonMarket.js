@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { approval } from './certificate';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
-const address = '0x86E70857B06f6f5dC441Ef53bE975c88dD8A36a7';
+const address = '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0';
 const fracAbi = ['function fractionizeNft(uint256 nftId, uint256 amount)'];
 
 export const fractionizeNft = async (_id) => {
@@ -29,7 +29,7 @@ export const getNftList = async () => {
           }
       `;
 
-  const url = 'https://api.studio.thegraph.com/query/57070/avatar/v3/';
+  const url = 'http://localhost:8000/subgraphs/name/market/';
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
