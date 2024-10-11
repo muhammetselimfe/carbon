@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { fractionizeNft } from '../utils/web3/carbonMarket';
 import { mintCertificate } from '../utils/web3/certificate';
+import SvgIcon from '../components/SvgIcon';
 
 const Provider = () => {
   const [amount, setAmount] = useState('');
@@ -31,57 +32,75 @@ const Provider = () => {
   };
 
   return (
-    <section className="w-full pt-24 md:pt-0 md:h-screen relative flex flex-row justify-center items-center">
-      <div className="block md:flex container w-full items-center justify-between">
-        <div className="w-full md:w-5/12 overflow-hidden shadow-2xl border-2 border-gray-100 rounded-xl mb-5">
-          <div className="p-5">
-            <div className="border-b w-full">
-              <h1 className="text-xl font-bold text-center pb-2">Mint</h1>
+    <section className="w-full pt-24 md:pt-32 md:min-h-screen relative flex flex-col">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold text-center mb-12">Provider Dashboard</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <div className="p-8">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center">
+                <SvgIcon icon="CARBON" className="w-8 h-8 mr-3 text-green-500" />
+                Mint Certificate
+              </h2>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Amount of carbon (m³)</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                    placeholder="1000000.0"
+                    required
+                    onChange={amountChange}
+                    value={amount}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Certificate ID</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                    placeholder="12345678"
+                    required
+                    onChange={certificateChange}
+                    value={certificate}
+                  />
+                </div>
+                <button
+                  onClick={mint}
+                  className="w-full py-3 px-6 text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105"
+                >
+                  Mint NFT
+                </button>
+              </div>
             </div>
-            <p className="pt-5">Amount of carbon (m³)</p>
-            <input
-              type="text"
-              className="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="1000000.0"
-              required
-              onChange={(e) => amountChange(e)}
-            />
-            <p className="pt-5">Certificate ID</p>
-            <input
-              type="text"
-              className="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="12345678"
-              required
-              onChange={(e) => certificateChange(e)}
-            />
-            <button
-              onClick={mint}
-              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg align-center w-full mt-5"
-            >
-              Mint NFT
-            </button>
           </div>
-        </div>
 
-        <div className="w-full md:w-5/12 overflow-hidden shadow-2xl border-2 border-gray-100 rounded-xl">
-          <div className="p-5">
-            <div className="border-b w-full">
-              <h1 className="text-xl font-bold text-center pb-2">Fracturize</h1>
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <div className="p-8">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center">
+                <SvgIcon icon="swap" className="w-8 h-8 mr-3 text-blue-500" />
+                Fractionalize NFT
+              </h2>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">NFT ID to Fractionalize</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                    placeholder="1"
+                    required
+                    onChange={nftIDChange}
+                    value={nftID}
+                  />
+                </div>
+                <button
+                  onClick={fracturize}
+                  className="w-full py-3 px-6 text-white bg-gradient-to-r from-purple-400 to-indigo-500 hover:from-purple-500 hover:to-indigo-600 rounded-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105"
+                >
+                  Fractionalize NFT
+                </button>
+              </div>
             </div>
-            <p className="pt-5">Fracturize NFT ID</p>
-            <input
-              type="text"
-              className="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="1"
-              required
-              onChange={(e) => nftIDChange(e)}
-            />
-            <button
-              onClick={fracturize}
-              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg align-center w-full mt-5"
-            >
-              Fracturize NFT
-            </button>
           </div>
         </div>
       </div>

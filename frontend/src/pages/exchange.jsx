@@ -1,54 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Swap from '../components/Swap';
 import Liquidity from '../components/Liquidity';
-// import { ethers } from "ethers";
 
-
-
-function Exchange() {
+const Exchange = () => {
   const [activeTab, setActiveTab] = useState('swap');
 
-
-// const provider = new ethers.providers.JsonRpcProvider("https://api.avax-test.network/ext/bc/C/rpc");
-
-// const DexAddress = "0x0355eE85Be5eD60331a36Ee096e829f500FC57c9";
-// const totalSupplyabi = [
-//   "function totalSupply() view returns (uint256)"
-// ];
-
-// async function totalSupply() {
-// 	const contract = new ethers.Contract(DexAddress, totalSupplyabi,provider);
-// 	let result = await contract.functions.totalSupply();
-//   result = result[0].toNumber();
-// 	console.log("result", result);
-// }
-
-// const cryptoDevTokenAddressabi = [
-//   "function cryptoDevTokenAddress() view returns (address)"
-// ];
-
-// async function cryptoDevTokenAddress() {
-// 	const contract = new ethers.Contract(DexAddress, cryptoDevTokenAddressabi, provider);   
-// 	const result = await contract.functions.cryptoDevTokenAddress();
-//   console.log("result", result[0]);
-// }
-
-
-
-useEffect(() => {
-  try {
-  //totalSupply();
-  //cryptoDevTokenAddress(); 
-} catch (err) {
-  console.log('error totalSupply ...', err)
-}
-}, [])
-
-
   return (
-    <section className="w-full pt-24 md:pt-0 md:h-screen relative flex flex-col justify-center items-center">
-      <div className="container w-full flex items-center justify-center">
-        <div className="w-full max-w-lg shadow-2xl border-2 border-gray-100 rounded-lg">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 sm:text-5xl md:text-6xl">
+            Exchange
+          </h1>
+          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            Swap tokens and manage liquidity in our decentralized exchange.
+          </p>
+        </div>
+        <div className="w-full max-w-lg mx-auto shadow-2xl border-2 border-gray-100 rounded-lg">
           <nav className="block w-full border-b-2 border-gray-100">
             <ul className="flex">
               <li
@@ -59,16 +27,12 @@ useEffect(() => {
                     : '')
                 }
               >
-                <a
-                  href="/#"
+                <button
                   className="cursor-pointer flex items-center"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveTab('swap');
-                  }}
+                  onClick={() => setActiveTab('swap')}
                 >
                   Swap
-                </a>
+                </button>
               </li>
               <li
                 className={
@@ -78,16 +42,12 @@ useEffect(() => {
                     : '')
                 }
               >
-                <a
-                  href="/#"
+                <button
                   className="cursor-pointer flex items-center"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveTab('liquidity');
-                  }}
+                  onClick={() => setActiveTab('liquidity')}
                 >
                   Liquidity
-                </a>
+                </button>
               </li>
             </ul>
           </nav>
@@ -97,8 +57,8 @@ useEffect(() => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
 
 export default Exchange;

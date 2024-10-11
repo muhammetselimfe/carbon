@@ -16,45 +16,34 @@ const NftCard = ({ cerfId, id, price }) => {
 
   useEffect(() => {
     fetchNftData(id);
-  });
+  }, [id]);
 
   return (
-    <div className="flex w-full items-center justify-center shadow-2xl">
-      <div className="w-full  overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
-        <div className="flex items-center justify-center p-2 text-center border-b border-gray-200">
-          <h3 className="text-left text-lg text-black font-semibold text-center">
-            {nftData.name}
-          </h3>
-        </div>
-
-        <div className="flex items-center justify-center border-b border-gray-200">
-          <Link
-            to={`/detail/${id}`}
-            className="flex items-center justify-center p-3"
-          >
-            <img src={nftData.image} alt={nftData.name} />
-          </Link>
-        </div>
-        <div className="flex justify-between p-5">
-          <div className="w-full flex items-center justify-center  font-bold">
-            <span className="mr-auto">Price:</span>
-            <div className="flex items-center justify-center">
-              <span className="text-lg mr-3 text-black"> {nftData.price}</span>
-              <div className="flex items-center justify-center rounded-full w-8 h-8">
-                <SvgIcon icon="CARBON" className="w-5 h-5" />
-              </div>
-            </div>
-            <span>{price}</span>
+    <div className="bg-gradient-to-br from-teal-50 to-cyan-100 rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl border border-teal-200">
+      <div className="p-5">
+        <h3 className="text-2xl font-bold text-teal-800 mb-3">
+          {nftData.name}
+        </h3>
+        <Link to={`/detail/${id}`} className="block">
+          <img
+            src={nftData.image}
+            alt={nftData.name}
+            className="w-full h-56 object-cover rounded-lg mb-4 shadow-md hover:opacity-90 transition-opacity duration-300"
+          />
+        </Link>
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-teal-700 font-semibold">Price:</span>
+          <div className="flex items-center bg-teal-600 rounded-full px-3 py-1">
+            <span className="text-lg font-bold text-white mr-2">{price}</span>
+            <SvgIcon icon="CARBON" className="w-5 h-5 text-teal-200" />
           </div>
         </div>
-        <div className="w-full text-gray-50">
-          <Link
-            to={`/detail/${id}`}
-            className="w-full flex justify-center items-center rounded bg-[#2a2a2a] p-4 hover:bg-[#F9FAFB] hover:text-black"
-          >
-            Retire
-          </Link>
-        </div>
+        <Link
+          to={`/detail/${id}`}
+          className="block w-full text-center py-3 px-4 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold rounded-lg hover:from-teal-500 hover:to-cyan-600 transition-all duration-300 ease-in-out transform hover:scale-105"
+        >
+          Retire Certificate
+        </Link>
       </div>
     </div>
   );
