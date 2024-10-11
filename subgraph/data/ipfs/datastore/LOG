@@ -63,3 +63,35 @@
 00:23:29.587100 version@stat F·[3] S·20KiB[20KiB] Sc·[0.75]
 00:23:29.589630 db@janitor F·5 G·0
 00:23:29.589749 db@open done T·7.320625ms
+=============== Oct 10, 2024 (UTC) ===============
+14:48:20.470244 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:48:20.472918 version@stat F·[3] S·20KiB[20KiB] Sc·[0.75]
+14:48:20.473128 db@open opening
+14:48:20.474072 journal@recovery F·1
+14:48:20.474984 journal@recovery recovering @13
+14:48:20.479894 memdb@flush created L0@15 N·38 S·2KiB "/F5..BII,v304":"/pr..mhJ,v332"
+14:48:20.481241 version@stat F·[4] S·23KiB[23KiB] Sc·[1.00]
+14:48:20.484968 db@janitor F·6 G·0
+14:48:20.485121 db@open done T·11.857083ms
+14:48:20.485171 table@compaction L0·4 -> L1·0 S·23KiB Q·341
+14:48:20.489344 table@build created L1@18 N·82 S·10KiB "/F5..BII,v304":"/pr..QKC,v267"
+14:48:20.489669 version@stat F·[0 1] S·10KiB[0B 10KiB] Sc·[0.00 0.00]
+14:48:20.491961 table@compaction committed F-3 S-12KiB Ke·0 D·255 T·6.104625ms
+14:48:20.492374 table@remove removed @15
+14:48:20.492842 table@remove removed @12
+14:48:20.493163 table@remove removed @5
+14:48:20.493485 table@remove removed @2
+14:52:44.268291 db@close closing
+14:52:44.268726 db@close done T·433.541µs
+=============== Oct 10, 2024 (UTC) ===============
+14:53:42.679785 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:53:42.682513 version@stat F·[0 1] S·10KiB[0B 10KiB] Sc·[0.00 0.00]
+14:53:42.682949 db@open opening
+14:53:42.683515 journal@recovery F·1
+14:53:42.684120 journal@recovery recovering @16
+14:53:42.689503 memdb@flush created L0@19 N·4 S·1KiB "/F5..BII,v343":"/pr..QKC,v345"
+14:53:42.690435 version@stat F·[1 1] S·11KiB[1KiB 10KiB] Sc·[0.25 0.00]
+14:53:42.693709 db@janitor F·4 G·0
+14:53:42.693836 db@open done T·10.640875ms
+15:01:29.547963 db@close closing
+15:01:29.548744 db@close done T·779.167µs
