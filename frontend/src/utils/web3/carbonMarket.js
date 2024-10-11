@@ -26,7 +26,7 @@ export const getNftList = async () => {
           }
       `;
 
-  const url = "https://api.studio.thegraph.com/query/57070/avatar/v3/";
+  const url = "http://localhost:8000/subgraphs/name/avatar";
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
