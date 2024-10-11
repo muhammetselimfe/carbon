@@ -26,7 +26,8 @@ export const getNftList = async () => {
           }
       `;
 
-  const url = "http://localhost:8000/subgraphs/name/avatar";
+  const url = "https://subgraph.decarbon.network/subgraphs/name/avatar";
+
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
