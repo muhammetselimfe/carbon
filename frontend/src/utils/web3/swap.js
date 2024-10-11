@@ -4,7 +4,8 @@ import abi from "./abis/UniswapV2Router02.json";
 const routerAbi = abi.abi;
 
 // Replace with the UniswapV2Router02 contract address
-const routerAddress = "0x061Eeefc20fcbA6b1694Ab6b0711f94bb88FA542";
+const routerAddress = "0x0a4507e9c2D3760CdF89e923940DdA6F00C4D54A";
+
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -19,23 +20,41 @@ export async function swapTokens(tokenIn, tokenOut, amountIn, amountOutMin) {
 
     const path = [tokenIn, tokenOut];
     amountIn = ethers.utils.parseEther(amountIn);
+    amountOutMin = ethers.utils.parseEther(amountOutMin.toString());
 
     const signer_address = await signer.getAddress();
-    const tx = await routerContract.connect(signer).swapExactTokensForTokens(
+    
+    console.log("Increasing allowance for", tokenIn);
+    await increaseAllowance(tokenIn, amountIn);
+
+    console.log("Swapping tokens", {
+      amountIn: amountIn.toString(),
+      amountOutMin: amountOutMin.toString(),
+      path,
+      to: signer_address,
+      deadline: Math.floor(Date.now() / 1000) + 60 * 10
+    });
+
+    const tx = await routerContract.swapExactTokensForTokens(
       amountIn,
       amountOutMin,
       path,
       signer_address,
       Math.floor(Date.now() / 1000) + 60 * 10,
-      { gasPrice: ethers.utils.parseUnits("30", "gwei") } // Set your preferred gas price
+      { gasLimit: 300000 }
     );
 
     console.log("Transaction hash:", tx.hash);
 
     const receipt = await tx.wait();
     console.log("Transaction confirmed in block", receipt.blockNumber);
+    return receipt;
   } catch (error) {
     console.error("Error swapping tokens:", error);
+    if (error.data) {
+      console.error("Error data:", error.data);
+    }
+    throw error;
   }
 }
 
@@ -48,15 +67,22 @@ export async function addLiquidity(amountADesired, amountBDesired) {
       signer
     );
 
-    const amountAMin = 10;
-    const amountBMin = 10;
-    amountADesired = parseInt(amountADesired);
-    amountBDesired = parseInt(amountBDesired);
-    const tokenB = "0xb6E6620792c475662A762d0684e00a997E3203bF"; // Replace with the actual address of token A
-    const tokenA = "0x05044Cd5D9D8fa101055de80427dF4969375Ac54"; // Replace with the actual address of token B
+    const tokenA = "0xe23407C178FeF19839B8ab4b8a8FCf86e106147F";
+    const tokenB = "0xfCaBDeDbaC55da2321bEf9878110f6d74AF8A483";
+
+    // Increase allowance for both tokens
+    await increaseAllowance(tokenA, amountADesired);
+    await increaseAllowance(tokenB, amountBDesired);
+
+    const amountAMin = ethers.utils.parseEther((parseFloat(amountADesired) * 0.95).toString());
+    const amountBMin = ethers.utils.parseEther((parseFloat(amountBDesired) * 0.95).toString());
+    amountADesired = ethers.utils.parseEther(amountADesired);
+    amountBDesired = ethers.utils.parseEther(amountBDesired);
 
     const signer_address = await signer.getAddress();
-    const tx = await routerContract.connect(signer).addLiquidity(
+    const deadline = Math.floor(Date.now() / 1000) + 60 * 10; // 10 minutes from now
+
+    const tx = await routerContract.addLiquidity(
       tokenA,
       tokenB,
       amountADesired,
@@ -64,16 +90,18 @@ export async function addLiquidity(amountADesired, amountBDesired) {
       amountAMin,
       amountBMin,
       signer_address,
-      Math.floor(Date.now() / 100) + 60 * 10
-      // { gasPrice: ethers.utils.parseUnits("3000000000000", "gwei") }
+      deadline,
+      { gasLimit: 300000 }
     );
 
     console.log("Transaction hash:", tx.hash);
 
     const receipt = await tx.wait();
     console.log("Transaction confirmed in block", receipt.blockNumber);
+    return receipt;
   } catch (error) {
     console.error("Error adding liquidity:", error);
+    throw error;
   }
 }
 
@@ -118,9 +146,9 @@ export async function addLiquidityETH(amountTokenDesired, amountETH) {
   }
 }
 
-const dexaddress = "0x0355eE85Be5eD60331a36Ee096e829f500FC57c9";
+const dexaddress = "0x0a4507e9c2D3760CdF89e923940DdA6F00C4D54A";
 
-const tokenAddress = "0xa4e0C6859C9Fe01B097f6AE17e9AD51656e23f68";
+const tokenAddress = "0xe23407C178FeF19839B8ab4b8a8FCf86e106147F";
 const cryptoDevTokenToEthabi = [
   "function cryptoDevTokenToEth(uint256 _tokensSold, uint256 _minEth)",
 ];
@@ -145,18 +173,16 @@ const increaseAllowanceabi = [
   "function increaseAllowance(address spender, uint256 addedValue) returns (bool)",
 ];
 
-export const increaseAllowance = async (_tokensSold) => {
+export const increaseAllowance = async (tokenAddress, amount) => {
   const contract = new ethers.Contract(
     tokenAddress,
     increaseAllowanceabi,
     signer
   );
-  const tx = await contract.functions.increaseAllowance(
-    dexaddress,
-    _tokensSold
-  );
+  const amountInWei = ethers.utils.parseEther(amount.toString());
+  const tx = await contract.increaseAllowance(routerAddress, amountInWei);
   const receipt = await tx.wait();
-  console.log("receipt", receipt);
+  console.log("Allowance increased:", receipt);
 };
 
 const getAmountOfTokensabi = [
@@ -218,4 +244,25 @@ export const balanceOf = async () => {
 
   console.log("result", result);
   return result;
+};
+
+export const getTokenBalance = async (tokenAddress) => {
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+
+    const ERC20_ABI = [
+      "function balanceOf(address account) view returns (uint256)",
+      "function decimals() view returns (uint8)",
+    ];
+
+    const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
+    const balance = await tokenContract.balanceOf(address);
+    const decimals = await tokenContract.decimals();
+    return ethers.utils.formatUnits(balance, decimals);
+  } catch (error) {
+    console.error("Error in getTokenBalance:", error);
+    throw error;
+  }
 };

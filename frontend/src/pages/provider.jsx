@@ -7,6 +7,7 @@ const Provider = () => {
   const [amount, setAmount] = useState('');
   const [certificate, setCertificate] = useState('');
   const [nftID, setNftID] = useState('');
+  const [certificateProvider, setCertificateProvider] = useState('Verra'); // Yeni state
 
   const amountChange = (e) => {
     setAmount(e.target.value);
@@ -18,6 +19,10 @@ const Provider = () => {
 
   const nftIDChange = (e) => {
     setNftID(e.target.value);
+  };
+
+  const certificateProviderChange = (e) => {
+    setCertificateProvider(e.target.value);
   };
 
   const mint = async () => {
@@ -43,6 +48,21 @@ const Provider = () => {
                 Mint Certificate
               </h2>
               <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Certificate Provider</label>
+                  <select
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                    value={certificateProvider}
+                    onChange={certificateProviderChange}
+                  >
+                    <option value="Verra">Verra</option>
+                    <option value="Gold Standard">Gold Standard</option>
+                    <option value="The Climate Registry">The Climate Registry</option>
+                    <option value="Recycling Company">Recycling Company</option>
+                    <option value="Bike Rental Company">Bike Rental Company</option>
+                    <option value="Solar Energy Company">Solar Energy Company</option>
+                  </select>
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Amount of carbon (m³)</label>
                   <input
