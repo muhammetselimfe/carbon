@@ -1,17 +1,32 @@
 import { ethers } from "ethers";
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
+let provider;
+
+if (typeof window.ethereum !== 'undefined') {
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+} else {
+  console.log('MetaMask is not installed. Please install it to use this feature.');
+}
+
 const address = "0x04D2021F4052C22A47338F33a917F4Bc712d593a"; //carbonmarket
 const fracAbi = ["function fractionizeNft(uint256 nftId, uint256 amount)"];
 
 export const fractionizeNft = async (_id) => {
-  //await approval(address);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(address, fracAbi, signer);
-  const tx = await contract.fractionizeNft(_id, 1);
+  if (!provider) {
+    throw new Error('Provider is not available. MetaMask might not be installed.');
+  }
 
-  const receipt = await tx.wait();
-  console.log("receipt", receipt);
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(address, fracAbi, signer);
+    const tx = await contract.fractionizeNft(_id, 1);
+    const receipt = await tx.wait();
+    console.log("receipt", receipt);
+    return receipt;
+  } catch (error) {
+    console.error("Error in fractionizeNft:", error);
+    throw error;
+  }
 };
 
 export const getNftList = async () => {
@@ -47,20 +62,21 @@ export const getNftList = async () => {
 const retireNftabi = ["function retireNft(uint256 nftId) payable"];
 
 export const retireNft = async (nftId) => {
+  if (!provider) {
+    throw new Error('Provider is not available. MetaMask might not be installed.');
+  }
+
   try {
     console.log("Retiring NFT with ID:", nftId);
-    // retireNft işleminin detayları
     const signer = provider.getSigner();
     const options = { value: ethers.utils.parseEther("0") };
     const contract = new ethers.Contract(address, retireNftabi, signer);
-    console.log(nftId);
     const tx = await contract.functions.retireNft(nftId, options);
-
     const receipt = await tx.wait();
     console.log("receipt", receipt);
     return receipt;
   } catch (error) {
     console.error("Error in retireNft:", error);
-    throw error; // Hatayı yukarı fırlat
+    throw error;
   }
 };
