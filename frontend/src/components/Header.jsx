@@ -10,6 +10,8 @@ const Header = () => {
   const [walletAddress, setWalletAddress] = useState('');
   const [ethBalance, setEthBalance] = useState('');
   const [errorMessage, setErrorMessage] = useState('');  // Hata mesajı için state
+  const [lastScrollY, setLastScrollY] = useState(0); // Track last scroll position
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true); // Track header visibility
   const location = useLocation();
 
   const CORRECT_CHAIN_ID = 5353;
@@ -75,8 +77,23 @@ const Header = () => {
     }
   };
 
+  const handleScroll = () => {
+    if (typeof window !== 'undefined') {
+      const currentScrollY = window.scrollY;
+      setIsHeaderVisible(currentScrollY < lastScrollY || currentScrollY < 50); // Show header if scrolling up or at the top
+      setLastScrollY(currentScrollY); // Update last scroll position
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // Cleanup listener on unmount
+    };
+  }, [lastScrollY]);
+
   return (
-    <header className={isNavExpanded ? 'menu-open' : ''}>
+    <header className={`${isHeaderVisible ? '' : 'hidden'} ${isNavExpanded ? 'menu-open' : ''}`}>
       <nav className="border-gray-200 px-2 sm:px-4 py-2.5 primary-menu left-0 rigt-0 z-20 fixed w-full bg-white border-b">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <Link
